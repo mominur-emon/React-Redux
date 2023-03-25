@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 
-const Message = () => {
+const Message = ({ msgOfCount }) => {
   console.log("message rendering");
   return (
     <div>
-      <p>send message</p>
+      <p>send {msgOfCount} message</p>
     </div>
   );
 };

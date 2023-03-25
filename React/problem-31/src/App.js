@@ -8,7 +8,7 @@ function App() {
     <div>
       <h1>count:{count}</h1>
       <button onClick={() => setCount((count) => count + 1)}>Increment</button>
-      <Message />
+      <Message msgOfCount={count} />
     </div>
   );
 }
