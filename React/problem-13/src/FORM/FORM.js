@@ -6,14 +6,7 @@ export default function FORM() {
   const { Name, Email, Password } = user;
 
   const handleChange = (e) => {
-    const filedName = e.target.name;
-    if (filedName === "name") {
-      setUser({ Name: e.target.value, Email, Password });
-    } else if (filedName === "email") {
-      setUser({ Name, Email: e.target.value, Password });
-    } else if (filedName === "password") {
-      setUser({ Name, Email, Password: e.target.value });
-    }
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -30,7 +23,7 @@ export default function FORM() {
           <label htmlFor="name">Name: </label>
           <input
             type="text"
-            name="name"
+            name="Name"
             id="name"
             value={Name}
             onChange={handleChange}
@@ -41,7 +34,7 @@ export default function FORM() {
           <label htmlFor="email">Email: </label>
           <input
             type="email"
-            name="email"
+            name="Email"
             id="email"
             value={Email}
             onChange={handleChange}
@@ -52,7 +45,7 @@ export default function FORM() {
           <label htmlFor="password">Password: </label>
           <input
             type="password"
-            name="password"
+            name="Password"
             id="password"
             value={Password}
             onChange={handleChange}
@@ -60,7 +53,7 @@ export default function FORM() {
           />
         </div>
         <div className={style.formGroup}>
-          <button type="submit"> Register </button>
+          <button type="submit">Register</button>
         </div>
       </form>
     </div>
