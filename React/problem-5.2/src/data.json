@@ -1,0 +1,22 @@
+[
+  {
+    "name": " Mominur",
+    "age": 25,
+    "phones": [
+      {
+        "homePhone": "5662323131",
+        "cellPhone": "01704222541"
+      }
+    ]
+  },
+  {
+    "name": "rifat",
+    "age": 20,
+    "phones": [
+      {
+        "homePhone": "13548787",
+        "cellPhone": "017656352"
+      }
+    ]
+  }
+]
