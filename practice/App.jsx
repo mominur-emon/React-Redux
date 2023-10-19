@@ -1,63 +1,97 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import axios from "axios";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const handleIncrement = () => {
-    setCount(count + 1);
-  };
+  const [data, setData] = useState({
+    name: "",
+    age: "",
+    email: "",
+    count: 0,
+  });
+  const [submittedData, setSubmittedData] = useState(null);
+  /*short way*/
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setData({
+  //     ...data,
+  //     [name]: value,
+  //   });
+  // };
 
-  const handleDecrement = () => {
-    setCount(count - 1);
-  };
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const URL = "https://jsonplaceholder.typicode.com/posts";
+  // const handleIncrement = () => {
+  //   setData({
+  //     ...data,
+  //     count: data.count + 1,
+  //   });
+  // };
 
-    axios
-      .get(URL)
-      .then((res) => {
-        setData(res.data);
-        // console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmittedData(data);
+  };
 
   return (
     <>
       <div>
-        <h1>Count:{count}</h1>
-        <button onClick={handleIncrement}>Increment</button>
-        <button onClick={handleDecrement}>Decrement</button>
-        <br />
-        <h1>show below table title</h1>
+        <h1>count: {data.count}</h1>
+        <button onClick={() => setData({ ...data, count: data.count + 1 })}>
+          Increment
+        </button>
+        <button onClick={() => setData({ ...data, count: data.count - 1 })}>
+          Decrement
+        </button>
+      </div>
 
-        {data.map((user, id) => (
-          <p key={id}>
-            <h3> user Id :{user.userId}</h3>
-            <h5> Title: {user.title}</h5>
-            <p>{user.body}</p>
-          </p>
-        ))}
+      <div>
+        <h1>Submit Form</h1>
+
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={data.name}
+              required
+              onChange={(e) => setData({ ...data, name: e.target.value })}
+            />
+          </label>
+          <br />
+          <label>
+            Age:
+            <input
+              type="number"
+              name="age"
+              value={data.age}
+              required
+              onChange={(e) => setData({ ...data, age: e.target.value })}
+            />
+          </label>
+          <br />
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={data.email}
+              required
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+          </label>
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+
+        {submittedData && (
+          <div>
+            <h2>Submitted Data:</h2>
+            <p>Name: {submittedData.name}</p>
+            <p>Age: {submittedData.age}</p>
+            <p>Email: {submittedData.email}</p>
+          </div>
+        )}
       </div>
     </>
   );
 }
 
 export default App;
-
-/* api summary
-[
-  {
-    "userId": 1,
-    "id": 1,
-    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-  },
-  {
-.................
-  }
-]*/
